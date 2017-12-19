@@ -1,13 +1,12 @@
 package net.mostlyoriginal.game.system.render;
 
 import com.artemis.Aspect;
-import com.artemis.E;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
-import com.artemis.utils.reflect.ClassReflection;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import net.mostlyoriginal.game.GdxArtemisGame;
 import net.mostlyoriginal.game.component.logic.Transition;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 
@@ -48,7 +47,7 @@ public class TransitionSystem extends EntityProcessingSystem {
     protected void process(Entity e) {
         try {
             assetSystem.stopMusic();
-            game.setScreen(ClassReflection.newInstance(E(e).transitionScreen()));
+            GdxArtemisGame.getInstance().testNextGenomeFitness();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

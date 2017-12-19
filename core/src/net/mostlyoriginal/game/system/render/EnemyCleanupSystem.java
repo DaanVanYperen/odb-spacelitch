@@ -17,7 +17,6 @@ import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 public class EnemyCleanupSystem extends FluidIteratingSystem {
 
     CameraSystem cameraSystem;
-    private MyAnimRenderSystem myAnimRenderSystem;
     private boolean lockCamera;
     private CameraFollowSystem cameraFollowSystem;
     private float minY;

@@ -32,7 +32,7 @@ public class GameScreenAssetSystem extends AbstractAssetSystem {
     public GameScreenAssetSystem() {
         super("tileset.png");
         loadSprites();
-        loadSounds(
+      /*  loadSounds(
                 new String[]{
                         "Explosion_1",
                         "Explosion_2",
@@ -53,7 +53,7 @@ public class GameScreenAssetSystem extends AbstractAssetSystem {
                         "pew",
                         "woosh_1",
                 }
-        );
+        );*/
 
         Texture tiles = new Texture("tileset.png");
 
@@ -91,12 +91,16 @@ public class GameScreenAssetSystem extends AbstractAssetSystem {
     }
 
     public void playMusicInGame(String song) {
-        if (DEBUG_NO_MUSIC) return;
-        if (music != null) music.stop();
-        music = Gdx.audio.newMusic(Gdx.files.internal("Music/" + song));
-        music.setLooping(true);
-        music.play();
-        music.setPan(0, 0.12f);
+//        if (DEBUG_NO_MUSIC) return;
+//        if (music != null) music.stop();
+//        music = Gdx.audio.newMusic(Gdx.files.internal("Music/" + song));
+//        music.setLooping(true);
+//        music.play();
+//        music.setPan(0, 0.12f);
+    }
+
+    @Override
+    public void playSfx(String name) {
     }
 
     public void stopMusic() {
@@ -106,7 +110,7 @@ public class GameScreenAssetSystem extends AbstractAssetSystem {
     @Override
     protected void initialize() {
         super.initialize();
-        playMusicInGame("something1.mp3");
+//        playMusicInGame("something1.mp3");
     }
 
     private void loadSprites() {

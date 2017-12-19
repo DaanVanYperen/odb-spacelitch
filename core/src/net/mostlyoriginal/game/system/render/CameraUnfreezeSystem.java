@@ -16,7 +16,6 @@ import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 public class CameraUnfreezeSystem extends FluidIteratingSystem {
 
     CameraSystem cameraSystem;
-    private MyAnimRenderSystem myAnimRenderSystem;
     private boolean lockCamera;
     private CameraFollowSystem cameraFollowSystem;
     private float maxY;

@@ -48,7 +48,7 @@ public class PickupSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-        if ( overlaps(e, player) ) {
+        if ( player != null && overlaps(e, player) ) {
             upgradeGuns(player);
             e.deleteFromWorld();
         }

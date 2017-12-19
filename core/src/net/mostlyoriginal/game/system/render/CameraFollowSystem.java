@@ -19,7 +19,6 @@ import com.badlogic.gdx.math.Interpolation;
 public class CameraFollowSystem extends FluidIteratingSystem {
 
     CameraSystem cameraSystem;
-    private MyAnimRenderSystem myAnimRenderSystem;
     private boolean lockCamera;
 
     public CameraFollowSystem() {
@@ -33,6 +32,12 @@ public class CameraFollowSystem extends FluidIteratingSystem {
     public float minCameraY() {
         return cameraSystem.camera.position.y - G.SCREEN_HEIGHT / 2;
     }
+    /** Pixel perfect aligning. */
+    public float roundToPixels(final float val) {
+        // since we use camera zoom rounding to integers doesn't work properly.
+        return ((int)(val * cameraSystem.zoom)) / (float)cameraSystem.zoom;
+    }
+
 
     @Override
     protected void process(E e) {
@@ -40,7 +45,7 @@ public class CameraFollowSystem extends FluidIteratingSystem {
 
         if ( lockCamera) return;
         if (e.wallSensorOnFloor() || e.wallSensorOnPlatform() || true) {
-            float newTargetY = (int) myAnimRenderSystem.roundToPixels(e.posY() + e.boundsCy()) + (G.SCREEN_HEIGHT / G.CAMERA_ZOOM);
+            float newTargetY = (int) roundToPixels(e.posY() + e.boundsCy()) + (G.SCREEN_HEIGHT / G.CAMERA_ZOOM);
             if (targetY != newTargetY) {
                 sourceY = (int) cameraSystem.camera.position.y;
                 targetY = (int) (newTargetY);
@@ -50,13 +55,13 @@ public class CameraFollowSystem extends FluidIteratingSystem {
         if (cooldown <= 1F) {
             cooldown += world.delta*2f;
             if (cooldown > 1f) cooldown = 1f;
-            cameraSystem.camera.position.y = myAnimRenderSystem.roundToPixels(Interpolation.pow2Out.apply(sourceY,targetY, cooldown));        }
-        cameraSystem.camera.position.x = myAnimRenderSystem.roundToPixels(e.posX()) + e.boundsCx();
+            cameraSystem.camera.position.y = roundToPixels(Interpolation.pow2Out.apply(sourceY,targetY, cooldown));        }
+        cameraSystem.camera.position.x = roundToPixels(e.posX()) + e.boundsCx();
         cameraSystem.camera.update();
 
         float maxDistance = (Gdx.graphics.getHeight() / G.CAMERA_ZOOM) * 0.5F * 0.7f;
         if (  e.posY() < cameraSystem.camera.position.y - maxDistance) {
-            cameraSystem.camera.position.y = myAnimRenderSystem.roundToPixels(e.posY() + maxDistance);
+            cameraSystem.camera.position.y = roundToPixels(e.posY() + maxDistance);
             cameraSystem.camera.update();
         }
     }

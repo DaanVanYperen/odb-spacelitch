@@ -1,6 +1,7 @@
 package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
+import com.artemis.BaseSystem;
 import com.artemis.E;
 import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
@@ -43,6 +44,7 @@ public class DialogSystem extends FluidIteratingSystem {
 
     ShipControlSystem shipControlSystem;
     private E camera;
+    private DeathSystem deathSystem;
 
     public DialogSystem() {
         super(Aspect.all(Pos.class, Dialog.class));
@@ -56,8 +58,11 @@ public class DialogSystem extends FluidIteratingSystem {
 
 
         if (activeDialog != null) {
+            if ( "victory".equals(activeDialog.trigger)) {
+                deathSystem.doExit();
+            }
             world.delta = 0;
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            if (true) {
                 activeLine++;
                 hideActiveLines();
                 if (activeLine >= activeDialog.lines.length) {
@@ -108,6 +113,7 @@ public class DialogSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
+        if ( player == null ) return;
         boolean triggerOnCamera = "camera".equals(e.getDialog().data.trigger);
 
         if ((triggerOnCamera ? cameraSystem.camera.position.y > e.posY() : overlaps(e, player))) {

@@ -24,7 +24,6 @@ public class SocketSystem extends FluidIteratingSystem {
     private PowerSystem powerSystem;
     private GameScreenAssetSystem assetSystem;
     private EntitySpawnerSystem entitySpawnerSystem;
-    private MyAnimRenderSystem animSystem;
     private DialogSystem dialogSystem;
 
     public SocketSystem() {
@@ -52,10 +51,8 @@ public class SocketSystem extends FluidIteratingSystem {
             battery.deleteFromWorld();
             socket.chargeIncrease(G.BARS_FOR_BATTERY);
             if (socket.hasSlumbering()) {
-                animSystem.forceAnim(socket, "robot-wake-up");
                 socket.removeSlumbering();
             } else {
-                animSystem.forceAnim(socket, "robot-close-battery");
             }
         } else {
             socket.socketEntityId(battery.socketedInsideEntityId(socket.id()).invisible().id());

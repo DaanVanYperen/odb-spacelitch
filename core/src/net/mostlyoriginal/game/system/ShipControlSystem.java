@@ -33,12 +33,22 @@ public class ShipControlSystem extends FluidIteratingSystem {
     private float JUMP_FACTOR = 15000;
     //private SocketSystem socketSystem;
     private FollowSystem followSystem;
-    private MyAnimRenderSystem animSystem;
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
     private GroupManager groupManager;
+    private GenomeSystem genomeSystem;
 
     public boolean scrolling = true;
+
+    public static final int CONTROL_COUNT = 5;
+    private GenomeSensorSystem genomeSensorSystem;
+    public float[] evaluate;
+
+    public class Controls {
+        boolean left, right, up, down, shoot;
+    }
+
+    private Controls c = new Controls();
 
 
     public ShipControlSystem() {
@@ -59,29 +69,30 @@ public class ShipControlSystem extends FluidIteratingSystem {
         float dx = 0;
         float dy = 0;
 
-        fireGuns(e);
+        evaluate = genomeSystem.evaluate(genomeSensorSystem.getInput());
+        c.down = evaluate[0] > 0.5;
+        c.up = evaluate[1] > 0.5;
+        c.left = evaluate[2] > 0.5;
+        c.right = evaluate[3] > 0.5;
+        c.shoot = evaluate[4] > 0.5;
+
+        fireGuns(e, c.shoot);
 
         e.animLoop(true);
         if (!e.hasDead()) {
-            if (Gdx.input.isKeyPressed(Input.Keys.A)||Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.A)||Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-                    e.animAge(0);
-                }
+            if (c.left || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 dx = -MOVEMENT_FACTOR;
                 e.animId("player-left");
                 e.animLoop(false);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.D)||Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.D)||Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-                    e.animAge(0);
-                }
+            } else if (c.right|| Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                 dx = MOVEMENT_FACTOR;
                 e.animId("player-right");
                 e.animLoop(false);
             } else clampX(e, dx); // hit the breaks.
 
-            if (Gdx.input.isKeyPressed(Input.Keys.W)||Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (c.up) {
                 dy = MOVEMENT_FACTOR;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.S)||Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            } else if (c.down) {
                 dy = -MOVEMENT_FACTOR;
             } else {
                 clampY(e, dy); // hit the breaks.
@@ -102,6 +113,8 @@ public class ShipControlSystem extends FluidIteratingSystem {
             e.physicsVy(MathUtils.clamp(e.physicsVy() + (dy * world.delta), -SPEED_CLAMP, SPEED_CLAMP));
         }
 
+        if ( e.physicsVy() == 0 ) e.physicsVy(0.0001f);
+
 
         if (e.hasCarries() && e.carriesEntityId() != 0) {
             e.carriesAnchorX(e.animFlippedX() ? 4 : -4);
@@ -116,8 +129,8 @@ public class ShipControlSystem extends FluidIteratingSystem {
         entityWithTag("camera").posX(e.posX());
     }
 
-    private void fireGuns(E e) {
-        boolean firing = !e.hasDead() && (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.E));
+    private void fireGuns(E e, boolean shoot) {
+        boolean firing = !e.hasDead() && shoot;
 
         ImmutableBag<Entity> entities = groupManager.getEntities("player-guns");
         for (Entity entity : entities) {
@@ -137,7 +150,6 @@ public class ShipControlSystem extends FluidIteratingSystem {
                     socketCarried(e, socket);
                 } else {
                     callRobot(e);
-                    animSystem.forceAnim(e, playerAnimPrefix + "whistles");
                     //dropCarried(e);
                 }
             } else {

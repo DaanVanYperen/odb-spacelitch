@@ -17,6 +17,7 @@ import net.mostlyoriginal.game.api.EBag;
 import net.mostlyoriginal.game.component.*;
 import net.mostlyoriginal.game.screen.GameScreen;
 import net.mostlyoriginal.game.system.FollowSystem;
+import net.mostlyoriginal.game.system.GenomeSystem;
 import net.mostlyoriginal.game.system.ShipControlSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
@@ -37,7 +38,6 @@ public class DeathSystem extends FluidIteratingSystem {
     private MapCollisionSystem mapCollisionSystem;
     private EntitySpawnerSystem entitySpawnerSystem;
     private ParticleSystem particleSystem;
-    private MyAnimRenderSystem animSystem;
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
     private CameraSystem cameraSystem;
@@ -45,6 +45,7 @@ public class DeathSystem extends FluidIteratingSystem {
     private SocketSystem socketSystem;
     private CameraShakeSystem cameraShakeSystem;
     private ShipControlSystem shipControlSystem;
+    private GenomeSystem genomeSystem;
 
     public DeathSystem() {
         super(Aspect.all(Pos.class).one(Mortal.class));
@@ -80,6 +81,11 @@ public class DeathSystem extends FluidIteratingSystem {
 
             if (e.hasRunning() && e.posX() + e.boundsMaxx() < cameraSystem.camera.position.x - halfScreenWidth) {
                 e.dead();
+            }
+
+            if (e.hasDead() && e.isShipControlled()) {
+                doExit();
+                e.removeDead().removeMortal();
             }
         } else {
             e.deadCooldown(e.deadCooldown() - world.delta);
@@ -125,6 +131,7 @@ public class DeathSystem extends FluidIteratingSystem {
                     doExit();
                     e.removeDead().removeMortal();
                 } else {
+                    genomeSystem.addBonusFitness(100); // Bonus points for kills.
                     e.deleteFromWorld();
                 }
             }
@@ -211,14 +218,14 @@ public class DeathSystem extends FluidIteratingSystem {
 
     private E touchingDeadlyStuffs(E e, boolean onlyMortals) {
         for (E o : deadlies) {
-            if (o != e && o.teamTeam() != e.teamTeam() && overlaps(o, e) && !o.hasDead() && (!onlyMortals || o.hasMortal()))
+            if (o != e && !o.hasDead() && o.teamTeam() != e.teamTeam() && overlaps(o, e) && (!onlyMortals || o.hasMortal()))
                 return o;
         }
 
         return null;
     }
 
-    private void doExit() {
-        transitionSystem.transition(GameScreen.class, 0.1f);
+    void doExit() {
+        transitionSystem.transition(GameScreen.class, 0.0001f);
     }
 }

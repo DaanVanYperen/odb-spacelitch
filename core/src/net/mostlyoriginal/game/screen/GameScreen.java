@@ -6,8 +6,8 @@ import com.artemis.WorldConfigurationBuilder;
 import com.artemis.link.EntityLinkManager;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
-import com.badlogic.gdx.assets.loaders.BitmapFontLoader;
 import com.badlogic.gdx.graphics.Color;
+import com.evo.NEAT.Genome;
 import net.mostlyoriginal.api.manager.FontManager;
 import net.mostlyoriginal.api.screen.core.WorldScreen;
 import net.mostlyoriginal.api.system.camera.CameraShakeSystem;
@@ -15,7 +15,6 @@ import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.graphics.RenderBatchingSystem;
 import net.mostlyoriginal.api.system.physics.*;
 import net.mostlyoriginal.api.system.render.ClearScreenSystem;
-import net.mostlyoriginal.api.system.render.LabelRenderSystem;
 import net.mostlyoriginal.game.GdxArtemisGame;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.system.*;
@@ -24,7 +23,6 @@ import net.mostlyoriginal.game.system.map.*;
 import net.mostlyoriginal.game.system.render.*;
 import net.mostlyoriginal.game.system.view.*;
 import net.mostlyoriginal.plugin.OperationsPlugin;
-import net.mostlyoriginal.plugin.ProfilerPlugin;
 
 /**
  * Example main game screen.
@@ -34,16 +32,26 @@ import net.mostlyoriginal.plugin.ProfilerPlugin;
 public class GameScreen extends WorldScreen {
 
     public static final String BACKGROUND_COLOR_HEX = "0000FF";
+    private final Genome genome;
+    private boolean updateFitness;
+
+    public GameScreen(Genome genome, boolean updateFitness) {
+        this.genome = genome;
+        this.updateFitness = updateFitness;
+    }
 
     @Override
     protected World createWorld() {
         RenderBatchingSystem renderBatchingSystem;
         return new World(new WorldConfigurationBuilder()
-                .dependsOn(EntityLinkManager.class, ProfilerPlugin.class, OperationsPlugin.class)
+                .dependsOn(EntityLinkManager.class, OperationsPlugin.class)
                 .with(
+                        new MinDeltaSystem(15),
                         new SuperMapper(),
                         new TagManager(),
                         new GroupManager(),
+
+                        new GenomeSystem(genome, updateFitness),
 
                         new EntitySpawnerSystem(),
                         new MapSystem(),
@@ -65,7 +73,6 @@ public class GameScreen extends WorldScreen {
 
                         // spawn
                         new TriggerSystem(),
-                        new FarewellSystem(),
                         new SpoutSystem(),
 
                         // Control and logic.
@@ -73,6 +80,9 @@ public class GameScreen extends WorldScreen {
                         new EnemyCleanupSystem(),
                         new FollowSystem(),
                         new FlightPatternControlSystem(),
+
+                        new GenomeSensorSystem(),
+
                         new ShipControlSystem(),
                         new AttachmentSystem(),
                         new BirdBrainSystem(),
@@ -109,9 +119,9 @@ public class GameScreen extends WorldScreen {
                         new AdditiveRenderSystem(),
                         new MapRenderInFrontSystem(),
                         new TerminalSystem(),
-                        new ExitSystem(),
                         new DeathSystem(),
                         new HealthUISystem(),
+                        new GenomeSensorUISystem(),
                         new TransitionSystem(GdxArtemisGame.getInstance())
                 ).build());
     }

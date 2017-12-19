@@ -20,7 +20,6 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 public class TriggerSystem extends FluidIteratingSystem {
 
     private GameScreenAssetSystem assetSystem;
-    private FarewellSystem farewellSystem;
 
     public TriggerSystem() {
         super(Aspect.all(Trigger.class, Pos.class));
