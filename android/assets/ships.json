@@ -4,7 +4,7 @@
       "id": "player",
       "comment": "Player default ship.",
       "anim": "special",
-      "hp": 80
+      "hp": 10
     },
     {
       "id": "enemy1",

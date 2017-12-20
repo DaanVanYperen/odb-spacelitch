@@ -16,6 +16,7 @@ import net.mostlyoriginal.game.component.ShipControlled;
 import net.mostlyoriginal.game.component.Socket;
 import net.mostlyoriginal.game.component.map.WallSensor;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import net.mostlyoriginal.game.system.detection.DeathSystem;
 import net.mostlyoriginal.game.system.detection.DialogSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
@@ -43,6 +44,7 @@ public class ShipControlSystem extends FluidIteratingSystem {
     public static final int CONTROL_COUNT = 5;
     private GenomeSensorSystem genomeSensorSystem;
     public float[] evaluate;
+    private DeathSystem deathSystem;
 
     public class Controls {
         boolean left, right, up, down, shoot;
@@ -70,21 +72,21 @@ public class ShipControlSystem extends FluidIteratingSystem {
         float dy = 0;
 
         evaluate = genomeSystem.evaluate(genomeSensorSystem.getInput());
-        c.down = evaluate[0] > 0.5;
-        c.up = evaluate[1] > 0.5;
-        c.left = evaluate[2] > 0.5;
-        c.right = evaluate[3] > 0.5;
-        c.shoot = evaluate[4] > 0.5;
+        c.down = evaluate[0] >= 0.55;
+        c.up = evaluate[1] >= 0.55;
+        c.left = evaluate[2] >= 0.55;
+        c.right = evaluate[3] >= 0.55;
+        c.shoot = evaluate[4] >= 0.55;
 
         fireGuns(e, c.shoot);
 
         e.animLoop(true);
         if (!e.hasDead()) {
-            if (c.left || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            if (c.left) {
                 dx = -MOVEMENT_FACTOR;
                 e.animId("player-left");
                 e.animLoop(false);
-            } else if (c.right|| Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            } else if (c.right) {
                 dx = MOVEMENT_FACTOR;
                 e.animId("player-right");
                 e.animLoop(false);
@@ -127,6 +129,19 @@ public class ShipControlSystem extends FluidIteratingSystem {
                 .physicsVy(scrolling ? G.CAMERA_SCROLL_SPEED : 0);
 
         entityWithTag("camera").posX(e.posX());
+
+        if ( e.posY() < entityWithTag("camera").posY() - G.SCREEN_HEIGHT/2) {
+            deathSystem.doExit();
+        }
+        if ( e.posY() > entityWithTag("camera").posY() + G.SCREEN_HEIGHT/2) {
+            deathSystem.doExit();
+        }
+        if ( e.posX() < entityWithTag("camera").posX() - G.SCREEN_WIDTH/2) {
+            deathSystem.doExit();
+        }
+        if ( e.posX() > entityWithTag("camera").posX() + G.SCREEN_WIDTH/2) {
+            deathSystem.doExit();
+        }
     }
 
     private void fireGuns(E e, boolean shoot) {

@@ -17,6 +17,7 @@ import net.mostlyoriginal.game.api.EBag;
 import net.mostlyoriginal.game.component.*;
 import net.mostlyoriginal.game.screen.GameScreen;
 import net.mostlyoriginal.game.system.FollowSystem;
+import net.mostlyoriginal.game.system.GenomeSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
@@ -35,6 +36,7 @@ public class PickupSystem extends FluidIteratingSystem {
     private EntitySpawnerSystem entitySpawnerSystem;
     private GroupManager groupManager;
     private GameScreenAssetSystem gameScreenAssetSystem;
+    private GenomeSystem genomeSystem;
 
     public PickupSystem() {
         super(Aspect.all(Pos.class, Pickup.class).exclude(Frozen.class));
@@ -51,6 +53,7 @@ public class PickupSystem extends FluidIteratingSystem {
         if ( player != null && overlaps(e, player) ) {
             upgradeGuns(player);
             e.deleteFromWorld();
+            genomeSystem.addBonusFitness(1000); // Bonus points for pickups.
         }
     }
 

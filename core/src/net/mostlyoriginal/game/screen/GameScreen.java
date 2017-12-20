@@ -41,12 +41,21 @@ public class GameScreen extends WorldScreen {
     }
 
     @Override
+    public void dispose() {
+        super.dispose();
+        if ( world != null ) {
+            world.dispose();
+            world=null;
+        }
+    }
+
+    @Override
     protected World createWorld() {
         RenderBatchingSystem renderBatchingSystem;
         return new World(new WorldConfigurationBuilder()
                 .dependsOn(EntityLinkManager.class, OperationsPlugin.class)
                 .with(
-                        new MinDeltaSystem(15),
+                        new MinDeltaSystem(30),
                         new SuperMapper(),
                         new TagManager(),
                         new GroupManager(),

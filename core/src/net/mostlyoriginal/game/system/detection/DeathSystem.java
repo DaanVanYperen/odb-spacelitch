@@ -131,7 +131,7 @@ public class DeathSystem extends FluidIteratingSystem {
                     doExit();
                     e.removeDead().removeMortal();
                 } else {
-                    genomeSystem.addBonusFitness(100); // Bonus points for kills.
+                    genomeSystem.addBonusFitness(e.hasSocket() ? 1000 : 100); // Bonus points for kills.
                     e.deleteFromWorld();
                 }
             }
@@ -225,7 +225,7 @@ public class DeathSystem extends FluidIteratingSystem {
         return null;
     }
 
-    void doExit() {
+    public void doExit() {
         transitionSystem.transition(GameScreen.class, 0.0001f);
     }
 }

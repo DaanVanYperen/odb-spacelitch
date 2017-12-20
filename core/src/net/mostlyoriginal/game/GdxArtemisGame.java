@@ -53,6 +53,7 @@ public abstract class GdxArtemisGame extends Game {
     public void render() {
         super.render();
         if (Gdx.input.isKeyJustPressed(F11) && topGenome != null) {
+            index--;
             slowFramerate();
             setScreen(new GameScreen(topGenome, false));
         }
