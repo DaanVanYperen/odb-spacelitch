@@ -2,24 +2,13 @@ package net.mostlyoriginal.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.E;
-import com.artemis.Entity;
-import com.artemis.managers.GroupManager;
-import com.artemis.utils.ImmutableBag;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
-import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.physics.Frozen;
 import net.mostlyoriginal.api.component.physics.Physics;
 import net.mostlyoriginal.game.component.*;
-import net.mostlyoriginal.game.component.map.WallSensor;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
-import net.mostlyoriginal.game.system.detection.DialogSystem;
-import net.mostlyoriginal.game.system.map.MapCollisionSystem;
-import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
-import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
+import com.artemis.FluidIteratingSystem;
 
 /**
  * @author Daan van Yperen

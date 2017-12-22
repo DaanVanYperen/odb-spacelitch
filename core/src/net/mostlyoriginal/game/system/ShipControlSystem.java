@@ -15,11 +15,13 @@ import net.mostlyoriginal.game.component.Pickup;
 import net.mostlyoriginal.game.component.ShipControlled;
 import net.mostlyoriginal.game.component.Socket;
 import net.mostlyoriginal.game.component.map.WallSensor;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.detection.DialogSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
+
+import static net.mostlyoriginal.game.api.EUtil.firstOverlapping;
 
 /**
  * @author Daan van Yperen
@@ -132,7 +134,7 @@ public class ShipControlSystem extends FluidIteratingSystem {
     private void whistle(E e, String playerAnimPrefix) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E) || Gdx.input.isKeyJustPressed(Input.Keys.X)) {
             if (e.hasCarries()) {
-                E socket = firstTouchingEntityMatching(e, Aspect.all(Socket.class));
+                E socket = firstOverlapping(e, allEntitiesWith(Socket.class));
                 if (socket != null) {
                     socketCarried(e, socket);
                 } else {
@@ -141,7 +143,7 @@ public class ShipControlSystem extends FluidIteratingSystem {
                     //dropCarried(e);
                 }
             } else {
-                E pickup = firstTouchingEntityMatching(e, Aspect.all(Pickup.class));
+                E pickup = firstOverlapping(e, allEntitiesWith(Pickup.class));
                 if (pickup != null) {
                     carryItem(e, pickup);
                 }

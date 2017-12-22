@@ -4,13 +4,11 @@ import com.artemis.Aspect;
 import com.artemis.E;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import javafx.animation.Interpolator;
 import net.mostlyoriginal.api.component.basic.Pos;
-import net.mostlyoriginal.api.component.graphics.InterpolationStrategy;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.render.CameraFocus;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import com.badlogic.gdx.math.Interpolation;
 
 /**

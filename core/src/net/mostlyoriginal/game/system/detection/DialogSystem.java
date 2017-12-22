@@ -6,15 +6,16 @@ import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import javafx.scene.layout.Background;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.ui.Label;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.*;
 import net.mostlyoriginal.game.system.ShipControlSystem;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
+
+import static net.mostlyoriginal.game.api.EUtil.overlaps;
 
 /**
  * @author Daan van Yperen

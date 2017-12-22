@@ -2,12 +2,11 @@ package net.mostlyoriginal.game.system.map;
 
 import com.artemis.Aspect;
 import com.artemis.E;
-import com.artemis.systems.EntityProcessingSystem;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.utils.MapMask;
 import net.mostlyoriginal.game.component.map.WallSensor;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 
 /**
  * @author Daan van Yperen

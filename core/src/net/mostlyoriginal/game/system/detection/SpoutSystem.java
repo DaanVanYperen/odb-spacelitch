@@ -2,15 +2,13 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Frozen;
-import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.GunData;
 import net.mostlyoriginal.game.component.Spout;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 

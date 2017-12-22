@@ -3,16 +3,17 @@ package net.mostlyoriginal.game.system.detection;
 import com.artemis.Aspect;
 import com.artemis.E;
 import net.mostlyoriginal.api.component.basic.Pos;
-import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.system.camera.CameraShakeSystem;
 import net.mostlyoriginal.game.component.Exit;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.screen.GameScreen;
 import net.mostlyoriginal.game.system.FollowSystem;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 import net.mostlyoriginal.game.system.render.TransitionSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
+
+import static net.mostlyoriginal.game.api.EUtil.overlaps;
 
 /**
  * @author Daan van Yperen

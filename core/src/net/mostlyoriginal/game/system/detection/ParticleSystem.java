@@ -14,7 +14,7 @@ import net.mostlyoriginal.game.component.Deadly;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.GunData;
 import net.mostlyoriginal.game.component.SandSprinkler;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 
 import static com.badlogic.gdx.math.MathUtils.random;

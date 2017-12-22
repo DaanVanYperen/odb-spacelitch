@@ -1,15 +1,12 @@
 package net.mostlyoriginal.api.system.physics;
 
 import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.IteratingSystem;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Gravity;
-import net.mostlyoriginal.api.component.physics.Physics;
 import net.mostlyoriginal.game.component.Carries;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 
 import static com.artemis.E.E;
 

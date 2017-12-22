@@ -10,7 +10,7 @@ import com.badlogic.gdx.Input;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.system.physics.CollisionSystem;
 import net.mostlyoriginal.game.component.ui.Clickable;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 
 /**
  * Track mouse over clickables. will indicate hover or clicked.

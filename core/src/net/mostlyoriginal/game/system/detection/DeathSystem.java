@@ -9,16 +9,15 @@ import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.component.physics.Attached;
 import net.mostlyoriginal.api.operation.JamOperationFactory;
-import net.mostlyoriginal.api.operation.OperationFactory;
 import net.mostlyoriginal.api.system.camera.CameraShakeSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.physics.SocketSystem;
-import net.mostlyoriginal.game.api.EBag;
+import com.artemis.EBag;
 import net.mostlyoriginal.game.component.*;
 import net.mostlyoriginal.game.screen.GameScreen;
 import net.mostlyoriginal.game.system.FollowSystem;
 import net.mostlyoriginal.game.system.ShipControlSystem;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
@@ -26,6 +25,7 @@ import net.mostlyoriginal.game.system.render.TransitionSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 
 import static net.mostlyoriginal.api.operation.OperationFactory.*;
+import static net.mostlyoriginal.game.api.EUtil.overlaps;
 
 /**
  * @author Daan van Yperen

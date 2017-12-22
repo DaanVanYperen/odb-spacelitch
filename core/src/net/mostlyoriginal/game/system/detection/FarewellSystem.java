@@ -2,15 +2,10 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
-import net.mostlyoriginal.api.component.basic.Angle;
-import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.graphics.Tint;
-import net.mostlyoriginal.api.operation.OperationFactory;
-import net.mostlyoriginal.api.operation.flow.SequenceOperation;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.Farewell;
-import net.mostlyoriginal.game.component.Trigger;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 

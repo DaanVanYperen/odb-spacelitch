@@ -1,17 +1,10 @@
 package net.mostlyoriginal.game.system.render;
 
-import com.artemis.Aspect;
 import com.artemis.BaseSystem;
-import com.artemis.E;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
-import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
-import net.mostlyoriginal.api.system.core.PassiveSystem;
 import net.mostlyoriginal.game.component.G;
-import net.mostlyoriginal.game.component.render.CameraFocus;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.MapSystem;
 
 /**

@@ -2,18 +2,13 @@ package net.mostlyoriginal.game.system.map;
 
 import com.artemis.Aspect;
 import com.artemis.E;
-import com.artemis.Entity;
-import jdk.nashorn.internal.ir.Terminal;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
-import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.physics.Physics;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.utils.MapMask;
 import net.mostlyoriginal.game.component.Platform;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
-
-import static com.artemis.E.*;
+import com.artemis.FluidIteratingSystem;
 
 /**
  * @author Daan van Yperen

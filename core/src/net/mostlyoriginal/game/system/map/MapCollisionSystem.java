@@ -7,13 +7,12 @@ import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Physics;
-import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.utils.MapMask;
 import net.mostlyoriginal.game.component.Ethereal;
 import net.mostlyoriginal.game.component.Flying;
 import net.mostlyoriginal.game.component.G;
-import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 
 /**
