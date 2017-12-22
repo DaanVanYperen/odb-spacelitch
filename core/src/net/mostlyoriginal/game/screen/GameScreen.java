@@ -75,7 +75,6 @@ public class GameScreen extends WorldScreen {
                         new FlightPatternControlSystem(),
                         new ShipControlSystem(),
                         new AttachmentSystem(),
-                        new BirdBrainSystem(),
 
                         // Physics.
                         new GravitySystem(),
@@ -84,7 +83,6 @@ public class GameScreen extends WorldScreen {
                         new PhysicsSystem(),
 
                         // Effects.
-                        new FootstepSystem(),
                         new CarriedSystem(),
                         new SocketSystem(),
                         new PickupSystem(),
@@ -95,8 +93,6 @@ public class GameScreen extends WorldScreen {
                         new CameraClampToMapSystem(),
                         new CameraSystem(G.CAMERA_ZOOM),
                         new PriorityAnimSystem(),
-
-                        new JumpAttackSystem(),
 
                         new ClearScreenSystem(Color.valueOf("000000")),
                         new RenderBackgroundSystem(),
