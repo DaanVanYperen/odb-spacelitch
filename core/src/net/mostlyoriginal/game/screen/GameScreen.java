@@ -1,8 +1,6 @@
 package net.mostlyoriginal.game.screen;
 
-import com.artemis.SuperMapper;
-import com.artemis.World;
-import com.artemis.WorldConfigurationBuilder;
+import com.artemis.*;
 import com.artemis.link.EntityLinkManager;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
@@ -39,7 +37,11 @@ public class GameScreen extends WorldScreen {
     protected World createWorld() {
         RenderBatchingSystem renderBatchingSystem;
         return new World(new WorldConfigurationBuilder()
-                .dependsOn(EntityLinkManager.class, ProfilerPlugin.class, OperationsPlugin.class)
+                .dependsOn(
+                        EntityLinkManager.class,
+                        ProfilerPlugin.class,
+                        OperationsPlugin.class,
+                        FluidEntityPlugin.class)
                 .with(
                         new SuperMapper(),
                         new TagManager(),
