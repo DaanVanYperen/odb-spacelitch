@@ -19,6 +19,7 @@ import com.artemis.FluidIteratingSystem;
 @Exclude(Platform.class)
 public class PlatformCollisionSystem extends FluidIteratingSystem {
 
+    private static final Aspect.Builder ASPECT_PLATFORM = Aspect.all(Platform.class);
     private static boolean DEBUG = false;
 
     private MapSystem mapSystem;
@@ -68,7 +69,7 @@ public class PlatformCollisionSystem extends FluidIteratingSystem {
     private boolean collides(final float x, final float y) {
         //E().pos(x - 1, y - 1).anim("player-idle").render(2000);
 
-        for (E e : allEntitiesMatching(Aspect.all(Platform.class))) {
+        for (E e : E.withAspect(ASPECT_PLATFORM)) {
             if (overlaps(e, x, y)) return true;
         }
 

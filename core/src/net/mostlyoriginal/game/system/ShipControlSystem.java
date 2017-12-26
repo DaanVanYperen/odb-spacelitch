@@ -132,7 +132,7 @@ public class ShipControlSystem extends FluidIteratingSystem {
     private void whistle(E e, String playerAnimPrefix) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E) || Gdx.input.isKeyJustPressed(Input.Keys.X)) {
             if (e.hasCarries()) {
-                E socket = firstOverlapping(e, allEntitiesWith(Socket.class));
+                E socket = firstOverlapping(e, E.withComponent(Socket.class));
                 if (socket != null) {
                     socketCarried(e, socket);
                 } else {
@@ -141,7 +141,7 @@ public class ShipControlSystem extends FluidIteratingSystem {
                     //dropCarried(e);
                 }
             } else {
-                E pickup = firstOverlapping(e, allEntitiesWith(Pickup.class));
+                E pickup = firstOverlapping(e, E.withComponent(Pickup.class));
                 if (pickup != null) {
                     carryItem(e, pickup);
                 }

@@ -53,7 +53,7 @@ public class DeathSystem extends FluidIteratingSystem {
     @Override
     protected void begin() {
         super.begin();
-        deadlies = allEntitiesWith(Deadly.class);
+        deadlies = E.withComponent(Deadly.class);
     }
 
     Tint BLINK = new Tint(1f, 0f, 0f, 1f);
@@ -133,7 +133,7 @@ public class DeathSystem extends FluidIteratingSystem {
     }
 
     private void purgeGuns(int id) {
-        for (E e : allEntitiesWith(Attached.class)) {
+        for (E e : E.withComponent(Attached.class)) {
             if ( e.attachedParent() == id )
                 e.deleteFromWorld();
         }

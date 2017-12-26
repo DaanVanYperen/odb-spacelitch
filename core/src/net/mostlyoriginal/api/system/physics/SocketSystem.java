@@ -61,7 +61,7 @@ public class SocketSystem extends FluidIteratingSystem {
     }
 
     public void respawnRobotBatteries() {
-        for (E socket : allEntitiesWith(Socket.class)) {
+        for (E socket : E.withComponent(Socket.class)) {
             if (socket.typeType().equals("battery2") && socket.socketEntityId() == 0 && !socket.isRobot()) {
                 entitySpawnerSystem.spawnBatteryInSocket("battery2", socket);
             }

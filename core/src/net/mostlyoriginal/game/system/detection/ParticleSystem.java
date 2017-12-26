@@ -40,7 +40,7 @@ public class ParticleSystem extends FluidIteratingSystem {
     public float cooldown = 0;
 
     public void sprinkleSand(int percentageChance) {
-        for (E e : allEntitiesWith(SandSprinkler.class)) {
+        for (E e : E.withComponent(SandSprinkler.class)) {
             if (MathUtils.random(0, 100f) <= percentageChance) {
                 triggerSprinkler(e);
             }
