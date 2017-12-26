@@ -30,7 +30,7 @@ public class PickupSystem extends FluidIteratingSystem {
     @Override
     protected void begin() {
         super.begin();
-        player = entityWithTag("player");
+        player = E.withTag("player");
     }
 
     @Override

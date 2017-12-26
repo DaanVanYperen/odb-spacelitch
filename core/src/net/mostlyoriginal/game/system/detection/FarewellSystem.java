@@ -38,8 +38,8 @@ public class FarewellSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-        final E player = entityWithTag("player");
-        final E robot = entityWithTag("robot");
+        final E player = E.withTag("player");
+        final E robot = E.withTag("robot");
         age += world.delta;
 
 
@@ -107,10 +107,10 @@ public class FarewellSystem extends FluidIteratingSystem {
     public void start() {
         if (!step0) {
             step0 = true;
-            final E player = entityWithTag("player");
-            final E robot = entityWithTag("robot");
+            final E player = E.withTag("player");
+            final E robot = E.withTag("robot");
             player.removeMortal().removeShipControlled().anim("player-idle");
-            E marker = entityWithTag("marker");
+            E marker = E.withTag("marker");
             marker.deleteFromWorld();
             robot.anim("robot-idle");
             E.E().farewell();

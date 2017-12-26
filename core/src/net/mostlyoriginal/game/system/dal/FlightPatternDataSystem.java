@@ -5,7 +5,6 @@ import com.artemis.annotations.Wire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import net.mostlyoriginal.game.component.FlightPatternData;
-import net.mostlyoriginal.game.system.render.FlightPatternLibrary;
 
 /**
  * @author Daan van Yperen

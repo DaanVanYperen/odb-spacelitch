@@ -1,4 +1,4 @@
-package net.mostlyoriginal.game.system.render;
+package net.mostlyoriginal.game.system.dal;
 
 import net.mostlyoriginal.game.component.FlightPattern;
 import net.mostlyoriginal.game.component.FlightPatternData;

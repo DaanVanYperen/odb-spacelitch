@@ -23,8 +23,8 @@ public class TriggerSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-        E player = entityWithTag("player");
-        E robot = entityWithTag("robot");
+        E player = E.withTag("player");
+        E robot = E.withTag("robot");
 
         boolean robotOverlaps = overlaps(robot, e);
         if (overlaps(player, e) || robotOverlaps) {

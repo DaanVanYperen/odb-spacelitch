@@ -111,18 +111,17 @@ public class ShipControlSystem extends FluidIteratingSystem {
         if (scrolling) {
             e.posY(e.posY() + G.CAMERA_SCROLL_SPEED * world.delta);
         }
-        entityWithTag("camera")
+        E.withTag("camera")
                 .physicsVy(scrolling ? G.CAMERA_SCROLL_SPEED : 0);
 
-        entityWithTag("camera").posX(e.posX());
+        E.withTag("camera").posX(e.posX());
     }
 
     private void fireGuns(E e) {
         boolean firing = !e.hasDead() && (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.E));
 
-        ImmutableBag<Entity> entities = groupManager.getEntities("player-guns");
-        for (Entity entity : entities) {
-            E.E(entity.getId())
+        for (E gun : E.withGroup("player-guns")) {
+            gun
                     .shooting(firing).tint(1f, 1f, 1f, 1f)
                     .physicsVx(e.physicsVx())
                     .physicsVy(e.physicsVy())

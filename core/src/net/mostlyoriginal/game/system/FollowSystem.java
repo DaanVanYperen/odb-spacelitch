@@ -34,7 +34,7 @@ public class FollowSystem extends FluidIteratingSystem {
 
     protected void createMarker(E e) {
 
-        E marker = entityWithTag("marker");
+        E marker = E.withTag("marker");
         if (marker == null) {
             marker = E.E();
         }
@@ -59,7 +59,7 @@ public class FollowSystem extends FluidIteratingSystem {
 
         if (!robotFacingPlayerAtStart) {
             robotFacingPlayerAtStart = true;
-            E player = entityWithTag("player");
+            E player = E.withTag("player");
             e.animFlippedX(player.posX() + player.boundsCy() < e.posX() + e.boundsCx());
         }
 
@@ -67,8 +67,8 @@ public class FollowSystem extends FluidIteratingSystem {
         //e.angleRotation(0);
         e.physicsVr(0);
 
-        E player = entityWithTag("player");
-        E following = !e.isRunning() ? entityWithTag("marker") : player;
+        E player = E.withTag("player");
+        E following = !e.isRunning() ? E.withTag("marker") : player;
 
         if (e.chargeCharge() > 0L) {
             e.animFlippedX(player.posX() + player.boundsCy() < e.posX() + e.boundsCx());
@@ -182,11 +182,11 @@ public class FollowSystem extends FluidIteratingSystem {
     }
 
     private void updateChargeIndicator(E e) {
-        E chargeIndicator = entityWithTag("robot-charge");
+        E chargeIndicator = E.withTag("robot-charge");
         chargeIndicator.render(G.LAYER_PLAYER_ROBOT_BATTERY);
         chargeIndicator.posX(e.posX() + (chargeIndicator.boundsMaxx() * 0.5f));
         chargeIndicator.posY(e.posY() + e.boundsMaxy() + 5);
-        if ( e.isSlumbering() || entityWithTag("robotDialog") != null) {
+        if ( e.isSlumbering() || E.withTag("robotDialog") != null) {
             chargeIndicator.invisible();
         } else chargeIndicator.removeInvisible();
 

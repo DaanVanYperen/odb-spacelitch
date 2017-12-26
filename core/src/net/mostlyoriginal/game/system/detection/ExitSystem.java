@@ -31,8 +31,8 @@ public class ExitSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-        E player = entityWithTag("player");
-        E robot = entityWithTag("robot");
+        E player = E.withTag("player");
+        E robot = E.withTag("robot");
         if (overlaps(robot, e) && !e.exitOpen()) {
             if (robot.chargeCharge() < G.BARS_NEEDED_FOR_BREAKING_DOOR && e.exitCooldown() >= 2.9f) {
                 if ( !robot.hasNeedsBatteries() ) {

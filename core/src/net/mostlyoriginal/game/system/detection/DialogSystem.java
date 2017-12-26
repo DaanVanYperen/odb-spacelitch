@@ -50,8 +50,8 @@ public class DialogSystem extends FluidIteratingSystem {
     @Override
     protected void begin() {
         super.begin();
-        player = entityWithTag("player");
-        camera = entityWithTag("camera");
+        player = E.withTag("player");
+        camera = E.withTag("camera");
 
 
         if (activeDialog != null) {
@@ -127,7 +127,7 @@ public class DialogSystem extends FluidIteratingSystem {
     }
 
     private void renderLine(int offsetY, String text, String portrait, boolean right) {
-        int id = entityWithTag("camera").id();
+        int id = E.withTag("camera").id();
         E dialog = E.E()
                 .labelText(text)
                 .group("dialog")

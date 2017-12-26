@@ -73,7 +73,7 @@ public class SpoutSystem extends FluidIteratingSystem {
     }
 
     private boolean playerWithInRange(float x, float y) {
-        float range = entityWithTag("player").posXy().dst2(x, y, 0);
+        float range = E.withTag("player").posXy().dst2(x, y, 0);
         return range < 224 * 224 && range > 48 * 48;
     }
 

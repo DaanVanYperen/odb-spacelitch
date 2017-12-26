@@ -26,7 +26,7 @@ public class EnemyCleanupSystem extends FluidIteratingSystem {
     @Override
     protected void begin() {
         super.begin();
-        final E camera = entityWithTag("camera");
+        final E camera = E.withTag("camera");
         minY = cameraFollowSystem.minCameraY() - 60;
     }
 

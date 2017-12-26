@@ -75,7 +75,7 @@ public class FlightPatternControlSystem extends FluidIteratingSystem {
     private void facePlayer(E e, FlightPatternStep step) {
 
         Pos turretPos = e.getPos();
-        E player = entityWithTag("player");
+        E player = E.withTag("player");
         if (player != null) {
             Pos playerPos = player.getPos();
             float angle = v2.set(playerPos.getX(), playerPos.getY()).sub(turretPos.getX(), turretPos.getY()).angle();
