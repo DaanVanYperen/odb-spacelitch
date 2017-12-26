@@ -16,7 +16,6 @@ import static com.artemis.E.*;
  *
  * @author Daan van Yperen
  */
-@Wire
 public class OdbFeatureDetectionSystem extends BaseSystem {
 
 	public static final String FEATURES_TAG = "features";

@@ -1,22 +1,10 @@
-package net.mostlyoriginal.game.system.view;
+package net.mostlyoriginal.game.system.dal;
 
 import com.artemis.BaseSystem;
-import com.artemis.E;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Json;
-import net.mostlyoriginal.api.manager.AbstractAssetSystem;
-import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.ShipData;
-import net.mostlyoriginal.game.component.SpriteData;
-import net.mostlyoriginal.game.system.render.ShipLibrary;
-import net.mostlyoriginal.game.system.render.SpriteLibrary;
-
-import static net.mostlyoriginal.game.component.G.DEBUG_NO_MUSIC;
 
 /**
  * @author Daan van Yperen

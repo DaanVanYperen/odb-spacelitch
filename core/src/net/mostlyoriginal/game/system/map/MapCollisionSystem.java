@@ -2,6 +2,8 @@ package net.mostlyoriginal.game.system.map;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.basic.Bounds;
@@ -18,6 +20,8 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 /**
  * @author Daan van Yperen
  */
+@All({Physics.class, Pos.class, Bounds.class})
+@Exclude({Flying.class, Ethereal.class})
 public class MapCollisionSystem extends FluidIteratingSystem {
 
     public static boolean DEBUG = false;
@@ -33,10 +37,6 @@ public class MapCollisionSystem extends FluidIteratingSystem {
 
     private Color RED = Color.valueOf("FF0000FF");
     private GameScreenAssetSystem assetSystem;
-
-    public MapCollisionSystem() {
-        super(Aspect.all(Physics.class, Pos.class, Bounds.class).exclude(Flying.class, Ethereal.class));
-    }
 
     @Override
     protected void begin() {
@@ -129,7 +129,7 @@ public class MapCollisionSystem extends FluidIteratingSystem {
             if (e.hasGun() && e.gunData().animbounced != null) {
                 e.teamTeam(G.TEAM_ENEMIES);
                 e.animId(e.gunData().animbounced);
-                e.glowAnim(e.gunData().animbounced +"-glow");
+                e.glowAnim(e.gunData().animbounced + "-glow");
             }
         }
     }

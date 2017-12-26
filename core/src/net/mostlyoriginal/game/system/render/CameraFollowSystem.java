@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.render;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import net.mostlyoriginal.api.component.basic.Pos;
@@ -14,15 +15,12 @@ import com.badlogic.gdx.math.Interpolation;
 /**
  * @author Daan van Yperen
  */
+@All({Pos.class,CameraFocus.class})
 public class CameraFollowSystem extends FluidIteratingSystem {
 
     CameraSystem cameraSystem;
     private MyAnimRenderSystem myAnimRenderSystem;
     private boolean lockCamera;
-
-    public CameraFollowSystem() {
-        super(Aspect.all(Pos.class, CameraFocus.class));
-    }
 
     private int targetY = 0;
     private int sourceY = 0;

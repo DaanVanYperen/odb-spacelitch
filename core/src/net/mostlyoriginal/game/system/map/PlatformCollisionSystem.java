@@ -2,6 +2,8 @@ package net.mostlyoriginal.game.system.map;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Physics;
@@ -13,6 +15,8 @@ import com.artemis.FluidIteratingSystem;
 /**
  * @author Daan van Yperen
  */
+@All({Physics.class, Pos.class, Bounds.class})
+@Exclude(Platform.class)
 public class PlatformCollisionSystem extends FluidIteratingSystem {
 
     private static boolean DEBUG = false;
@@ -24,7 +28,7 @@ public class PlatformCollisionSystem extends FluidIteratingSystem {
     private MapMask solidMask;
 
     public PlatformCollisionSystem() {
-        super(Aspect.all(Physics.class, Pos.class, Bounds.class).exclude(Platform.class));
+        super();
     }
 
     @Override
@@ -62,7 +66,7 @@ public class PlatformCollisionSystem extends FluidIteratingSystem {
     }
 
     private boolean collides(final float x, final float y) {
-         //E().pos(x - 1, y - 1).anim("player-idle").render(2000);
+        //E().pos(x - 1, y - 1).anim("player-idle").render(2000);
 
         for (E e : allEntitiesMatching(Aspect.all(Platform.class))) {
             if (overlaps(e, x, y)) return true;

@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.Farewell;
@@ -14,6 +15,7 @@ import static net.mostlyoriginal.api.operation.OperationFactory.*;
 /**
  * @author Daan van Yperen
  */
+@All(Farewell.class)
 public class FarewellSystem extends FluidIteratingSystem {
 
     private GameScreenAssetSystem assetSystem;
@@ -33,11 +35,6 @@ public class FarewellSystem extends FluidIteratingSystem {
     private MyAnimRenderSystem animSystem;
     private boolean step1point5 = false;
     private CameraSystem cameraSystem;
-
-    public FarewellSystem() {
-
-        super(Aspect.all(Farewell.class));
-    }
 
     @Override
     protected void process(E e) {

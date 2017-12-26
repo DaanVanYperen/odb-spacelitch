@@ -10,7 +10,6 @@ import static com.artemis.E.E;
 /**
  * @author Daan van Yperen
  */
-@Wire
 public class GameScreenSetupSystem extends PassiveSystem {
 
     GameScreenAssetSystem assetSystem;

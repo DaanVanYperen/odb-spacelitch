@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -23,6 +24,7 @@ import static net.mostlyoriginal.api.operation.OperationFactory.*;
 /**
  * @author Daan van Yperen
  */
+@All(SandSprinkler.class)
 public class ParticleSystem extends FluidIteratingSystem {
 
     private Color BLOOD_COLOR = Color.valueOf("4B1924");
@@ -34,11 +36,6 @@ public class ParticleSystem extends FluidIteratingSystem {
     private Builder bakery = new Builder();
     private GameScreenAssetSystem assetSystem;
     private CameraSystem cameraSystem;
-
-    public ParticleSystem() {
-        super(Aspect.all(SandSprinkler.class));
-    }
-
 
     public float cooldown = 0;
 

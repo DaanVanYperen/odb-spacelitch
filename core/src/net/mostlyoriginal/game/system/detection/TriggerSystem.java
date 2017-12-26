@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.game.component.Trigger;
 import com.artemis.FluidIteratingSystem;
@@ -12,14 +13,11 @@ import static net.mostlyoriginal.game.api.EUtil.overlaps;
 /**
  * @author Daan van Yperen
  */
+@All({Trigger.class, Pos.class})
 public class TriggerSystem extends FluidIteratingSystem {
 
     private GameScreenAssetSystem assetSystem;
     private FarewellSystem farewellSystem;
-
-    public TriggerSystem() {
-        super(Aspect.all(Trigger.class, Pos.class));
-    }
 
     String playingSong;
 
@@ -76,7 +74,7 @@ public class TriggerSystem extends FluidIteratingSystem {
 
     private void playMusic(E e) {
         String song = e.triggerParameter();
-        if ( !song.equals(playingSong)) {
+        if (!song.equals(playingSong)) {
             playingSong = song;
             assetSystem.playMusicInGame(song);
         }

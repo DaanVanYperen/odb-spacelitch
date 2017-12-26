@@ -3,6 +3,7 @@ package net.mostlyoriginal.game.system.detection;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;
+import com.artemis.annotations.All;
 import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -20,6 +21,7 @@ import static net.mostlyoriginal.game.api.EUtil.overlaps;
 /**
  * @author Daan van Yperen
  */
+@All({Pos.class, Dialog.class})
 public class DialogSystem extends FluidIteratingSystem {
 
     public static final int DIALOG_PADDING_X = 16;
@@ -44,10 +46,6 @@ public class DialogSystem extends FluidIteratingSystem {
 
     ShipControlSystem shipControlSystem;
     private E camera;
-
-    public DialogSystem() {
-        super(Aspect.all(Pos.class, Dialog.class));
-    }
 
     @Override
     protected void begin() {

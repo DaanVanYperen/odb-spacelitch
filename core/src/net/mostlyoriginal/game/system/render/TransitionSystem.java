@@ -3,6 +3,7 @@ package net.mostlyoriginal.game.system.render;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;
+import com.artemis.annotations.All;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.utils.reflect.ClassReflection;
@@ -20,14 +21,13 @@ import static net.mostlyoriginal.api.utils.Duration.*;
  *
  * @author Daan van Yperen
  */
-@Wire
+@All(Transition.class)
 public class TransitionSystem extends EntityProcessingSystem {
 
     private Game game;
     private GameScreenAssetSystem assetSystem;
 
     public TransitionSystem(Game game) {
-        super(Aspect.all(Transition.class));
         this.game = game;
     }
 

@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.physics.Physics;
@@ -15,6 +16,7 @@ import static net.mostlyoriginal.game.api.EUtil.overlaps;
 /**
  * @author Daan van Yperen
  */
+@All({Follow.class, Physics.class, WallSensor.class, Anim.class})
 public class FollowSystem extends FluidIteratingSystem {
     public static final int ALLOWED_DISTANCE = 10;
     private static final float RUN_SLOW_PACE_FACTOR = 50;
@@ -24,10 +26,6 @@ public class FollowSystem extends FluidIteratingSystem {
     private MapCollisionSystem mapCollision;
     //private SocketSystem socketSystem;
     private boolean robotFacingPlayerAtStart = false;
-
-    public FollowSystem() {
-        super(Aspect.all(Follow.class, Physics.class, WallSensor.class, Anim.class));
-    }
 
     @Override
     protected void initialize() {

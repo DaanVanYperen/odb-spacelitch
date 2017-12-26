@@ -1,13 +1,11 @@
-package net.mostlyoriginal.game.system.view;
+package net.mostlyoriginal.game.system.dal;
 
 import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import net.mostlyoriginal.game.component.FlightPatternData;
-import net.mostlyoriginal.game.component.ShipData;
 import net.mostlyoriginal.game.system.render.FlightPatternLibrary;
-import net.mostlyoriginal.game.system.render.ShipLibrary;
 
 /**
  * @author Daan van Yperen

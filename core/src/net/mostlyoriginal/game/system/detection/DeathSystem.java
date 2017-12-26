@@ -2,6 +2,8 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
+import com.artemis.annotations.One;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -30,6 +32,8 @@ import static net.mostlyoriginal.game.api.EUtil.overlaps;
 /**
  * @author Daan van Yperen
  */
+@All(Pos.class)
+@One(Mortal.class)
 public class DeathSystem extends FluidIteratingSystem {
 
     public TransitionSystem transitionSystem;
@@ -45,10 +49,6 @@ public class DeathSystem extends FluidIteratingSystem {
     private SocketSystem socketSystem;
     private CameraShakeSystem cameraShakeSystem;
     private ShipControlSystem shipControlSystem;
-
-    public DeathSystem() {
-        super(Aspect.all(Pos.class).one(Mortal.class));
-    }
 
     @Override
     protected void begin() {

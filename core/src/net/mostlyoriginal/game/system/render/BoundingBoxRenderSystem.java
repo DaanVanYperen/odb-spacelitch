@@ -6,6 +6,8 @@ package net.mostlyoriginal.game.system.render;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -30,7 +32,8 @@ import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
  * @author Daan van Yperen
  * @see Anim
  */
-@Wire
+@All({Pos.class, Anim.class, Render.class})
+@Exclude(Invisible.class)
 public class BoundingBoxRenderSystem extends DeferredEntityProcessingSystem {
 
     protected M<Pos> mPos;
@@ -51,7 +54,7 @@ public class BoundingBoxRenderSystem extends DeferredEntityProcessingSystem {
     boolean isEnabled = false;
 
     public BoundingBoxRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.all(Pos.class, Anim.class, Render.class).exclude(Invisible.class), principal);
+        super(principal);
     }
 
     @Override

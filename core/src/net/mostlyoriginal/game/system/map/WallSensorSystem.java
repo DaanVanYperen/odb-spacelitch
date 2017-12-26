@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.map;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.utils.MapMask;
@@ -11,6 +12,7 @@ import com.artemis.FluidIteratingSystem;
 /**
  * @author Daan van Yperen
  */
+@All({WallSensor.class, Pos.class, Bounds.class})
 public class WallSensorSystem extends FluidIteratingSystem {
 
     private MapSystem mapSystem;
@@ -19,7 +21,7 @@ public class WallSensorSystem extends FluidIteratingSystem {
     private MapMask solidMask;
 
     public WallSensorSystem() {
-        super(Aspect.all(WallSensor.class, Pos.class, Bounds.class));
+        super();
     }
 
     @Override

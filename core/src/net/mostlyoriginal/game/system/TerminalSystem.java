@@ -1,18 +1,16 @@
 package net.mostlyoriginal.game.system;
 
-import com.artemis.Aspect;
+import com.artemis.C;
 import com.artemis.E;
-import net.mostlyoriginal.game.component.Terminal;
 import com.artemis.FluidIteratingSystem;
+import com.artemis.annotations.All;
+import net.mostlyoriginal.game.component.Terminal;
 
 /**
  * @author Daan van Yperen
  */
+@All(Terminal.class)
 public class TerminalSystem extends FluidIteratingSystem {
-    public TerminalSystem() {
-        super(Aspect.all(Terminal.class));
-    }
-
     @Override
     protected void process(E e) {
         e.deleteFromWorld();

@@ -23,7 +23,6 @@ import static net.mostlyoriginal.api.utils.Duration.seconds;
 /**
  * @author Daan van Yperen
  */
-@Wire
 public class FeatureScreenSetupSystem extends PassiveSystem {
 
     public static final int FEATURE_BORDER_MARGIN = 1;

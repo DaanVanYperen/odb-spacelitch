@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.map;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import net.mostlyoriginal.game.component.PriorityAnim;
 import com.artemis.FluidIteratingSystem;
 
@@ -10,11 +11,8 @@ import static com.artemis.E.E;
 /**
  * @author Daan van Yperen
  */
+@All(PriorityAnim.class)
 public class PriorityAnimSystem extends FluidIteratingSystem {
-    public PriorityAnimSystem() {
-        super(Aspect.all(PriorityAnim.class));
-    }
-
     @Override
     protected void process(E e) {
         e.priorityAnimCooldown(e.priorityAnimCooldown() - world.delta);

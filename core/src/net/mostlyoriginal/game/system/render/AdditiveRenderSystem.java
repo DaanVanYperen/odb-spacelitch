@@ -7,6 +7,8 @@ package net.mostlyoriginal.game.system.render;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.graphics.Color;
@@ -37,7 +39,8 @@ import net.mostlyoriginal.game.component.Glow;
  * @author Daan van Yperen
  * @see Anim
  */
-@Wire
+@All({Pos.class, Glow.class})
+@Exclude(Invisible.class)
 public class AdditiveRenderSystem extends EntityProcessingSystem {
 
     protected M<Pos> mPos;
@@ -52,10 +55,6 @@ public class AdditiveRenderSystem extends EntityProcessingSystem {
     protected SpriteBatch batch;
     private Origin DEFAULT_ORIGIN = new Origin(0.5f, 0.5f);
     private M<Glow> mGlow;
-
-    public AdditiveRenderSystem() {
-        super(Aspect.all(Pos.class, Glow.class).exclude(Invisible.class));
-    }
 
     @Override
     protected void initialize() {

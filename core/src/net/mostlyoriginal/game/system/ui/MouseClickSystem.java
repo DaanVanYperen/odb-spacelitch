@@ -17,7 +17,6 @@ import com.artemis.FluidIteratingSystem;
  *
  * @author Daan van Yperen
  */
-@Wire
 public class MouseClickSystem extends FluidIteratingSystem {
 
     CollisionSystem system;

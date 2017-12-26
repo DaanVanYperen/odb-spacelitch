@@ -1,8 +1,7 @@
 package net.mostlyoriginal.game.system;
 
-import com.artemis.Aspect;
-import com.artemis.E;
-import com.artemis.Entity;
+import com.artemis.*;
+import com.artemis.annotations.All;
 import com.artemis.managers.GroupManager;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +14,6 @@ import net.mostlyoriginal.game.component.Pickup;
 import net.mostlyoriginal.game.component.ShipControlled;
 import net.mostlyoriginal.game.component.Socket;
 import net.mostlyoriginal.game.component.map.WallSensor;
-import com.artemis.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.detection.DialogSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
@@ -26,6 +24,7 @@ import static net.mostlyoriginal.game.api.EUtil.firstOverlapping;
 /**
  * @author Daan van Yperen
  */
+@All({ShipControlled.class, Physics.class, WallSensor.class, Anim.class})
 public class ShipControlSystem extends FluidIteratingSystem {
     private static final float RUN_SLOW_PACE_FACTOR = 500;
     public static final int SPEED_CLAMP = 300;
@@ -44,7 +43,7 @@ public class ShipControlSystem extends FluidIteratingSystem {
 
 
     public ShipControlSystem() {
-        super(Aspect.all(ShipControlled.class, Physics.class, WallSensor.class, Anim.class));
+        super(Aspect.all(C.ShipControlled, C.Physics, C.WallSensor, C.Anim));
     }
 
     @Override
@@ -65,15 +64,15 @@ public class ShipControlSystem extends FluidIteratingSystem {
 
         e.animLoop(true);
         if (!e.hasDead()) {
-            if (Gdx.input.isKeyPressed(Input.Keys.A)||Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.A)||Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.A) || Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
                     e.animAge(0);
                 }
                 dx = -MOVEMENT_FACTOR;
                 e.animId("player-left");
                 e.animLoop(false);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.D)||Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.D)||Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.D) || Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
                     e.animAge(0);
                 }
                 dx = MOVEMENT_FACTOR;
@@ -81,9 +80,9 @@ public class ShipControlSystem extends FluidIteratingSystem {
                 e.animLoop(false);
             } else clampX(e, dx); // hit the breaks.
 
-            if (Gdx.input.isKeyPressed(Input.Keys.W)||Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 dy = MOVEMENT_FACTOR;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.S)||Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                 dy = -MOVEMENT_FACTOR;
             } else {
                 clampY(e, dy); // hit the breaks.

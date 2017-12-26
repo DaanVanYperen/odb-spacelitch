@@ -5,6 +5,8 @@ package net.mostlyoriginal.game.system.render;
  */
 
 import com.artemis.Aspect;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -26,7 +28,8 @@ import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
  * @author Daan van Yperen
  * @see Label
  */
-@Wire
+@All({Pos.class, Label.class, Render.class, BitmapFontAsset.class})
+@Exclude(Invisible.class)
 public class MyLabelRenderSystem extends DeferredEntityProcessingSystem {
 
     protected M<Pos> mPos;
@@ -40,7 +43,7 @@ public class MyLabelRenderSystem extends DeferredEntityProcessingSystem {
     private GlyphLayout glyphLayout = new GlyphLayout();
 
     public MyLabelRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.all(Pos.class, Label.class, Render.class, BitmapFontAsset.class).exclude(Invisible.class), principal);
+        super(principal);
         batch = new SpriteBatch(1000);
     }
 
@@ -73,12 +76,12 @@ public class MyLabelRenderSystem extends DeferredEntityProcessingSystem {
 
             batch.setColor(mTint.getSafe(e, Tint.WHITE).color);
 
-            switch ( label.align ) {
+            switch (label.align) {
                 case LEFT:
                     font.draw(batch, label.text, pos.xy.x, pos.xy.y);
                     break;
                 case RIGHT:
-                    glyphLayout.setText(font,label.text);
+                    glyphLayout.setText(font, label.text);
                     font.draw(batch, label.text, pos.xy.x - glyphLayout.width, pos.xy.y);
                     break;
             }

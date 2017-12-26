@@ -6,6 +6,8 @@ package net.mostlyoriginal.game.system.render;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,7 +33,8 @@ import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
  * @author Daan van Yperen
  * @see Anim
  */
-@Wire
+@All({Pos.class, Anim.class, Render.class})
+@Exclude(Invisible.class)
 public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
 
     protected M<Pos> mPos;
@@ -45,10 +48,10 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
     protected AbstractAssetSystem abstractAssetSystem;
 
     protected SpriteBatch batch;
-    private Origin DEFAULT_ORIGIN= new Origin(0.5f, 0.5f);
+    private Origin DEFAULT_ORIGIN = new Origin(0.5f, 0.5f);
 
     public MyAnimRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.all(Pos.class, Anim.class, Render.class).exclude(Invisible.class), principal);
+        super(principal);
     }
 
     @Override
@@ -70,24 +73,26 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
 
     protected void process(final int e) {
 
-        final Anim anim   = mAnim.get(e);
-        final Pos pos     = mPos.get(e);
+        final Anim anim = mAnim.get(e);
+        final Pos pos = mPos.get(e);
         final Angle angle = mAngle.getSafe(e, Angle.NONE);
         final float scale = mScale.getSafe(e, Scale.DEFAULT).scale;
         final Origin origin = mOrigin.getSafe(e, DEFAULT_ORIGIN);
 
         batch.setColor(mTint.getSafe(e, Tint.WHITE).color);
 
-        if ( anim.id != null ) drawAnimation(anim, angle, origin, pos, anim.id,scale);
-        if ( anim.id2 != null ) drawAnimation(anim, angle,origin,  pos, anim.id2,scale);
+        if (anim.id != null) drawAnimation(anim, angle, origin, pos, anim.id, scale);
+        if (anim.id2 != null) drawAnimation(anim, angle, origin, pos, anim.id2, scale);
 
         anim.age += world.delta * anim.speed;
     }
 
-    /** Pixel perfect aligning. */
+    /**
+     * Pixel perfect aligning.
+     */
     public float roundToPixels(final float val) {
         // since we use camera zoom rounding to integers doesn't work properly.
-        return ((int)(val * cameraSystem.zoom)) / (float)cameraSystem.zoom;
+        return ((int) (val * cameraSystem.zoom)) / (float) cameraSystem.zoom;
     }
 
     public void forceAnim(E e, String id) {
@@ -100,17 +105,16 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
     private void drawAnimation(final Anim animation, final Angle angle, final Origin origin, final Pos position, String id, float scale) {
 
         // don't support backwards yet.
-        if ( animation.age < 0 ) return;
+        if (animation.age < 0) return;
 
         final Animation<TextureRegion> gdxanim = (Animation<TextureRegion>) abstractAssetSystem.get(id);
-        if ( gdxanim == null) return;
+        if (gdxanim == null) return;
 
         final TextureRegion frame = gdxanim.getKeyFrame(animation.age, animation.loop);
 
         float ox = frame.getRegionWidth() * scale * origin.xy.x;
         float oy = frame.getRegionHeight() * scale * origin.xy.y;
-        if ( animation.flippedX && angle.rotation == 0)
-        {
+        if (animation.flippedX && angle.rotation == 0) {
             // mirror
             batch.draw(frame.getTexture(),
                     roundToPixels(position.xy.x),
@@ -129,8 +133,7 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
                     true,
                     false);
 
-        } else if ( angle.rotation != 0 )
-        {
+        } else if (angle.rotation != 0) {
             batch.draw(frame,
                     roundToPixels(position.xy.x),
                     roundToPixels(position.xy.y),

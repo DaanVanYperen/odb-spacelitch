@@ -2,6 +2,8 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Frozen;
@@ -15,21 +17,19 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 /**
  * @author Daan van Yperen
  */
+@All({Spout.class, Pos.class})
+@Exclude(Frozen.class)
 public class SpoutSystem extends FluidIteratingSystem {
 
     private ParticleSystem particleSystem;
     private EntitySpawnerSystem entitySpawnerSystem;
     private GameScreenAssetSystem assetSystem;
 
-    public SpoutSystem() {
-        super(Aspect.all(Spout.class, Pos.class).exclude(Frozen.class));
-    }
-
     Vector2 v2 = new Vector2();
 
     @Override
     protected void process(E e) {
-        if ( !e.hasShooting() ) {
+        if (!e.hasShooting()) {
             e.spoutAge(0);
             e.spoutSprayCooldown(e.spoutSprayCooldown() - world.delta);
             return;
@@ -46,11 +46,10 @@ public class SpoutSystem extends FluidIteratingSystem {
                 float angle = e.spoutAngle() + e.angleRotation(); //+ MathUtils.random(-2f, 2f);
 
                 // rotate to parent orientation.
-                if ( e.hasAttached() ) {
-                    if ( e.attachedParent() > 0 )
-                    {
+                if (e.hasAttached()) {
+                    if (e.attachedParent() > 0) {
                         E parent = E.E(e.attachedParent());
-                        if ( parent != null ) {
+                        if (parent != null) {
                             angle += parent.angleRotation();
                         }
                     }

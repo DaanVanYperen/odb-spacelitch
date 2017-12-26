@@ -1,10 +1,14 @@
 package net.mostlyoriginal.game.system;
 
 import com.artemis.Aspect;
+import com.artemis.C;
 import com.artemis.E;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
+import net.mostlyoriginal.api.component.interact.Aim;
 import net.mostlyoriginal.api.component.physics.Frozen;
 import net.mostlyoriginal.api.component.physics.Physics;
 import net.mostlyoriginal.game.component.*;
@@ -13,18 +17,16 @@ import com.artemis.FluidIteratingSystem;
 /**
  * @author Daan van Yperen
  */
+@All({FlightPattern.class, Physics.class})
+@Exclude(Frozen.class)
 public class FlightPatternControlSystem extends FluidIteratingSystem {
-
-    public FlightPatternControlSystem() {
-        super(Aspect.all(FlightPattern.class, Physics.class).exclude(Frozen.class));
-    }
 
     Vector2 v2 = new Vector2();
 
     @Override
     protected void process(E e) {
         final FlightPattern pattern = e.getFlightPattern();
-        if ( pattern.data == null ) return;
+        if (pattern.data == null) return;
 
         pattern.age += world.delta;
 
@@ -65,7 +67,7 @@ public class FlightPatternControlSystem extends FluidIteratingSystem {
     }
 
     private void spin(E e, FlightPatternStep step) {
-        e.physicsVr(e.physicsVr() + world.delta * 100f );
+        e.physicsVr(e.physicsVr() + world.delta * 100f);
         e.physicsVx(0);
         e.physicsVy(0);
     }
@@ -74,7 +76,7 @@ public class FlightPatternControlSystem extends FluidIteratingSystem {
 
         Pos turretPos = e.getPos();
         E player = entityWithTag("player");
-        if ( player != null ) {
+        if (player != null) {
             Pos playerPos = player.getPos();
             float angle = v2.set(playerPos.getX(), playerPos.getY()).sub(turretPos.getX(), turretPos.getY()).angle();
             e.angleRotation(90 + angle);
@@ -85,8 +87,8 @@ public class FlightPatternControlSystem extends FluidIteratingSystem {
     }
 
     private void hide(E e, FlightPatternStep step, float offsetX) {
-        e.posX( e.posX() + offsetX);
-        e.flightPatternActiveStep(e.flightPatternActiveStep()+1); // step instantly dobne.
+        e.posX(e.posX() + offsetX);
+        e.flightPatternActiveStep(e.flightPatternActiveStep() + 1); // step instantly dobne.
     }
 
     private void explode(E e, FlightPatternStep step) {
@@ -101,7 +103,7 @@ public class FlightPatternControlSystem extends FluidIteratingSystem {
     }
 
     private void flySinus(E e, FlightPatternStep step) {
-        v2.set(MathUtils.sin(e.flightPatternAge()*4f)*100f, 50).rotate(step.angle);
+        v2.set(MathUtils.sin(e.flightPatternAge() * 4f) * 100f, 50).rotate(step.angle);
         //e.angleRotate(step.facing);
         e.physicsVx(v2.x);
         e.physicsVy(v2.y);

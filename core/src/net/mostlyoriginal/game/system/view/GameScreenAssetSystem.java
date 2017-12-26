@@ -1,7 +1,6 @@
 package net.mostlyoriginal.game.system.view;
 
 import com.artemis.E;
-import com.artemis.annotations.Wire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,16 +10,13 @@ import com.badlogic.gdx.utils.Json;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.SpriteData;
-import net.mostlyoriginal.game.system.render.SpriteLibrary;
+import net.mostlyoriginal.game.system.dal.SpriteLibrary;
 
 import static net.mostlyoriginal.game.component.G.DEBUG_NO_MUSIC;
-import static net.mostlyoriginal.game.component.G.PLAYER_HEIGHT;
-import static net.mostlyoriginal.game.component.G.PLAYER_WIDTH;
 
 /**
  * @author Daan van Yperen
  */
-@Wire
 public class GameScreenAssetSystem extends AbstractAssetSystem {
 
     private SpriteLibrary spriteLibrary;

@@ -9,7 +9,6 @@ import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 /**
  * @author Daan van Yperen
  */
-@Wire
 public class FeatureScreenAssetSystem extends AbstractAssetSystem {
 
     public static final int LOGO_WIDTH = 175;

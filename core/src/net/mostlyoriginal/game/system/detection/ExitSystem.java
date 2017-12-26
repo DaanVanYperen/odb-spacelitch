@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.system.camera.CameraShakeSystem;
 import net.mostlyoriginal.game.component.Exit;
@@ -18,6 +19,7 @@ import static net.mostlyoriginal.game.api.EUtil.overlaps;
 /**
  * @author Daan van Yperen
  */
+@All({Exit.class, Pos.class})
 public class ExitSystem extends FluidIteratingSystem {
 
     public TransitionSystem transitionSystem;
@@ -26,10 +28,6 @@ public class ExitSystem extends FluidIteratingSystem {
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
     private CameraShakeSystem cameraShakeSystem;
-
-    public ExitSystem() {
-        super(Aspect.all(Exit.class, Pos.class));
-    }
 
     @Override
     protected void process(E e) {

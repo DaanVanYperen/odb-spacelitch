@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.render;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.artemis.annotations.All;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Frozen;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
@@ -13,6 +14,7 @@ import com.artemis.FluidIteratingSystem;
  *
  * @author Daan van Yperen
  */
+@All({Pos.class, Frozen.class})
 public class CameraUnfreezeSystem extends FluidIteratingSystem {
 
     CameraSystem cameraSystem;
@@ -20,10 +22,6 @@ public class CameraUnfreezeSystem extends FluidIteratingSystem {
     private boolean lockCamera;
     private CameraFollowSystem cameraFollowSystem;
     private float maxY;
-
-    public CameraUnfreezeSystem() {
-        super(Aspect.all(Pos.class, Frozen.class));
-    }
 
     @Override
     protected void begin() {

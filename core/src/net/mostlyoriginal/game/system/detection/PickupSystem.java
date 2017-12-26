@@ -3,6 +3,8 @@ package net.mostlyoriginal.game.system.detection;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;
+import com.artemis.annotations.All;
+import com.artemis.annotations.Exclude;
 import com.artemis.managers.GroupManager;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Frozen;
@@ -16,16 +18,14 @@ import static net.mostlyoriginal.game.api.EUtil.overlaps;
 /**
  * @author Daan van Yperen
  */
+@All({Pos.class, Pickup.class})
+@Exclude(Frozen.class)
 public class PickupSystem extends FluidIteratingSystem {
 
     private E player;
     private EntitySpawnerSystem entitySpawnerSystem;
     private GroupManager groupManager;
     private GameScreenAssetSystem gameScreenAssetSystem;
-
-    public PickupSystem() {
-        super(Aspect.all(Pos.class, Pickup.class).exclude(Frozen.class));
-    }
 
     @Override
     protected void begin() {
